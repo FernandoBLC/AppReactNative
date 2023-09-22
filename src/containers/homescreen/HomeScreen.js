@@ -17,7 +17,7 @@ function HomeScreen({ navigation }) {
             <Button
                 icon="account-multiple-outline"
                 mode="contained-tonal"
-                onPress={() => console.log('Pressed')}
+                onPress={() => navigation.navigate('LoginEmpleados')}
                 style={styles.buttonStyle}
                 buttonColor={MD2Colors.deepPurpleA100}
             >

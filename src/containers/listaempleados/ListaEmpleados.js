@@ -4,7 +4,7 @@ import { Button, Text, Modal, Portal, TextInput, Avatar, Card, MD2Colors } from 
 import * as SQLite from 'expo-sqlite';
 
 function ListaEmpleados({ navigation }) {
-    const db = SQLite.openDatabase("testdb1.db");
+    const db = SQLite.openDatabase("empleados.db");
     const [load, setLoad] = React.useState(true);
     const [dataDB, setDataDB] = React.useState([]);
     const [name, setName] = React.useState('');
@@ -35,12 +35,12 @@ function ListaEmpleados({ navigation }) {
 
     React.useEffect(() => {
         db.transaction((tx) => {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS tablaprueba1 (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, user TEXT, pass Text);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS empleados (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, user TEXT, pass Text);');
         });
 
         // setDataDB(resultSet.rows._array))
         db.transaction((tx) => {
-            tx.executeSql('SELECT * FROM tablaprueba1', null,
+            tx.executeSql('SELECT * FROM empleados', null,
                 (txObj, resultSet) => setDataDB(resultSet.rows._array)),
                 (txObj, error) => console.log("Error\n", error)
         });
@@ -57,7 +57,7 @@ function ListaEmpleados({ navigation }) {
 
     const addData = () => {
         db.transaction(tx => {
-            tx.executeSql('INSERT INTO tablaprueba1 (name, user, pass) values (?,?,?)', [name, user, pass],
+            tx.executeSql('INSERT INTO empleados (name, user, pass) values (?,?,?)', [name, user, pass],
                 (txObj, resultSet) => {
                     let existingNames = [...dataDB];
                     existingNames.push({ id: resultSet.insertId, name: name, user: user, pass: pass });
