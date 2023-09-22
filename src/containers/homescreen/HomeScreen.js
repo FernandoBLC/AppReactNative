@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, MD2Colors } from 'react-native-paper';
 
 function HomeScreen({ navigation }) {
     return (
@@ -10,6 +10,7 @@ function HomeScreen({ navigation }) {
                 mode="contained-tonal"
                 onPress={() => navigation.navigate('LoginEmpresa')}
                 style={styles.buttonStyle}
+                buttonColor={MD2Colors.deepPurpleA100}
             >
                 Login Empresa
             </Button>
@@ -18,6 +19,7 @@ function HomeScreen({ navigation }) {
                 mode="contained-tonal"
                 onPress={() => console.log('Pressed')}
                 style={styles.buttonStyle}
+                buttonColor={MD2Colors.deepPurpleA100}
             >
                 Login Empleado
             </Button>
@@ -26,6 +28,7 @@ function HomeScreen({ navigation }) {
                 mode="contained-tonal"
                 onPress={() => navigation.navigate('PostsScreen')}
                 style={styles.buttonStyle}
+                buttonColor={MD2Colors.deepPurpleA100}
             >
                 Posts
             </Button>

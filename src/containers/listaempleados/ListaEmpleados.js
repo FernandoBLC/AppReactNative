@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, ScrollView, StatusBar } from 'react-native';
-import { Button, Text, Modal, Portal, TextInput, Avatar, Card } from 'react-native-paper';
+import { Button, Text, Modal, Portal, TextInput, Avatar, Card, MD2Colors } from 'react-native-paper';
 import * as SQLite from 'expo-sqlite';
 
 function ListaEmpleados({ navigation }) {
@@ -124,19 +124,20 @@ function ListaEmpleados({ navigation }) {
                         />
                         <View style={styles.modalV2}>
                             <Button
-                                icon="post"
+                                icon="plus"
                                 mode="contained-tonal"
                                 onPress={addData}
                                 style={styles.buttonModal}
-                            >
+                                buttonColor={MD2Colors.deepPurpleA100}
+                                >
                                 Crear
                             </Button>
                             <Button
-                                icon="post"
+                                icon="cancel"
                                 mode="contained-tonal"
                                 onPress={hideModal}
                                 style={styles.buttonModal}
-                                buttonColor='#F47D7D'
+                                buttonColor={MD2Colors.redA200}
                             >
                                 Cancelar
                             </Button>
@@ -153,18 +154,18 @@ function ListaEmpleados({ navigation }) {
                         <Text variant="headlineSmall">Nombre</Text>
                         <Text variant="titleLarge">{profile.name}</Text>
 
-                        <Text variant="headlineSmall">Usuario</Text>
+                        {/* <Text variant="headlineSmall">Usuario</Text>
                         <Text variant="titleLarge">{profile.user}</Text>
 
                         <Text variant="headlineSmall">Password</Text>
-                        <Text variant="titleLarge">{profile.pass}</Text>
+                        <Text variant="titleLarge">{profile.pass}</Text> */}
                         <View style={styles.modalV2}>
                             <Button
-                                icon="post"
+                                icon="cancel"
                                 mode="contained-tonal"
                                 onPress={hideModalProfile}
                                 style={styles.buttonModal}
-                                buttonColor='#F47D7D'
+                                buttonColor={MD2Colors.redA200}
                             >
                                 Salir
                             </Button>
@@ -178,6 +179,7 @@ function ListaEmpleados({ navigation }) {
                 mode="contained-tonal"
                 onPress={showModal}
                 style={styles.buttonStyle}
+                buttonColor={MD2Colors.deepPurpleA100}
             >
                 Crear Nuevo Empleado
             </Button>
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     buttonStyle: {
-        width: '100%'
+        width: '100%',
     },
     textInput: {
         marginTop: 8,

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { ScrollView, View, StyleSheet } from 'react-native';
-import { Button, Text, Card } from 'react-native-paper';
+import { Button, Text, Card, ActivityIndicator, MD2Colors, Divider } from 'react-native-paper';
 
 
 function PostsScreen() {
-
     const [posts, setPosts] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     React.useEffect(() => {
+        setIsLoading(true);
         const getPosts = async () => {
             try {
                 const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -17,13 +18,26 @@ function PostsScreen() {
                 const data = await response.json();
                 console.log('Posts recibidos:', data);
                 setPosts(data);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error al realizar la solicitud:', error);
+                setIsLoading(false);
             }
         };
 
         getPosts();
     }, []);
+    if (isLoading) {
+        return (
+            <View style={styles.loadingStyle}>
+                <ActivityIndicator
+                    animating={true}
+                    size='large'
+                    color={MD2Colors.deepPurpleA200}
+                />
+            </View>
+        )
+    }
 
     if (!posts) {
         return (
@@ -38,19 +52,22 @@ function PostsScreen() {
     const showPosts = () => {
         return posts.map((item, index) => {
             return (
-                <Card style={styles.cardStyle} key={index}>
-                    <Card.Title title={item.title} subtitle={item.userId} />
-                    <Card.Content>
-                        <Text variant="headlineSmall">ID</Text>
-                        <Text variant="titleLarge">{item.id}</Text>
-                        <Text variant="headlineSmall">Descripcion</Text>
-                        <Text variant="titleLarge">{item.body}</Text>
-                    </Card.Content>
-                    <Card.Actions>
-                        <Button onPress={() => showModalProfile(item)} icon="eye-check">Ver</Button>
-                        {/* <Button>Ok</Button> */}
-                    </Card.Actions>
-                </Card>
+                <View key={index}>
+                    <Card style={styles.cardStyle} >
+                        <Card.Title title={item.title} subtitle={`User ID:${item.userId}`} />
+                        <Card.Content>
+                            <Text variant="titleLarge">ID</Text>
+                            <Text variant="bodyMedium">{item.id}</Text>
+                            <Text variant="titleLarge">Descripcion</Text>
+                            <Text variant="bodyMedium">{item.body}</Text>
+                        </Card.Content>
+                        <Card.Actions>
+                            {/* <Button onPress={() => showModalProfile(item)} icon="eye-check">Ver</Button> */}
+                            {/* <Button>Ok</Button> */}
+                        </Card.Actions>
+                    </Card>
+                    <Divider bold={true} />
+                </View>
             )
         })
     }
@@ -95,7 +112,11 @@ const styles = StyleSheet.create({
     },
     scrollStyle: {
         width: '100%',
-
+    },
+    loadingStyle: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
 

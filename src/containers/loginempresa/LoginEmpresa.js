@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { Button, TextInput, MD2Colors } from 'react-native-paper';
 import { useSelector } from 'react-redux';
-import { changeCredentials } from '../../store/loginSlice/LoginSlice';
 
 import LoginAuth from '../../hooks/LoginAuth';
 
@@ -37,6 +36,7 @@ function LoginEmpresa({ navigation }) {
                 value={user}
                 onChangeText={text => setUser(text)}
                 style={styles.textInput}
+                selectionColor={MD2Colors.deepPurple300}
             />
             <TextInput
                 label="Password"
@@ -45,6 +45,7 @@ function LoginEmpresa({ navigation }) {
                 secureTextEntry={showPassword}
                 right={<TextInput.Icon icon="eye" onPress={handleEventEye} />}
                 style={styles.textInput}
+                selectionColor={MD2Colors.deepPurple300}
             />
 
             <Button
@@ -52,6 +53,7 @@ function LoginEmpresa({ navigation }) {
                 mode="contained-tonal"
                 onPress={onSubmit}
                 style={styles.buttonStyle}
+                buttonColor={MD2Colors.deepPurpleA100}
             >
                 Iniciar Sesion
             </Button>
