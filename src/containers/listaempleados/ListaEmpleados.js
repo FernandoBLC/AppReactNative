@@ -75,6 +75,7 @@ function ListaEmpleados({ navigation }) {
 
     const showDataDB = () => {
         return dataDB.map((item, index) => {
+            console.log('Esto es el contenido general de item\n', item);
             return (
                 <Card style={styles.cardStyle} key={index}>
                     <Card.Content>
